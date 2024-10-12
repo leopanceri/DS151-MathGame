@@ -28,25 +28,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-
-        // Ajustar para edge-to-edge layout se necessário
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Inicializar as views
         expressionTextView = findViewById(R.id.expressionTextView)
         answerEditText = findViewById(R.id.answerEditText)
         submitButton = findViewById(R.id.submitButton)
         correctAnswerTextView = findViewById(R.id.correctAnswerTextView)
         nextButton = findViewById(R.id.nextButton)
 
-        // Gerar a primeira expressão
         generateNewExpression()
 
-        // Configurar os listeners dos botões
         setupListeners()
     }
 
@@ -86,17 +81,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (userAnswer == correctAnswer) {
-            // Resposta correta
-            findViewById<View>(R.id.main).setBackgroundColor(Color.GREEN)
+            findViewById<View>(R.id.main).setBackgroundColor(Color.parseColor("#66FF66"))
             score += 20
         } else {
-            // Resposta incorreta
-            findViewById<View>(R.id.main).setBackgroundColor(Color.RED)
+            findViewById<View>(R.id.main).setBackgroundColor(Color.parseColor("#FF6666"))
             correctAnswerTextView.visibility = View.VISIBLE
             correctAnswerTextView.text = "Resposta Correta: $correctAnswer"
         }
-
-        // Preparar para a próxima questão ou finalizar
         currentQuestion++
         submitButton.visibility = View.GONE
         answerEditText.visibility = View.GONE
@@ -105,7 +96,6 @@ class MainActivity : AppCompatActivity() {
         if (currentQuestion > 5) {
             nextButton.text = "Ver Nota Final"
         }
-
         // Ocultar o teclado virtual
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(answerEditText.windowToken, 0)
