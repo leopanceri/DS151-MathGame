@@ -97,8 +97,8 @@ class MainActivity : AppCompatActivity() {
             nextButton.text = "Ver Nota Final"
         }
         // Ocultar o teclado virtual
-        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(answerEditText.windowToken, 0)
+        val teclado = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        teclado.hideSoftInputFromWindow(answerEditText.windowToken, 0)
 
     }
 
